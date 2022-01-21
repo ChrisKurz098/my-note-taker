@@ -5,14 +5,13 @@ const fs = require('fs');
 
 router.get('/notes', (req, res) => {
     //read db.json
-    fs.readFile(path.join(__dirname, '../../db/db.json'), (err, data) => {
+    fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             return console.error(err);
         }
-        const results = JSON.parse(data);
-        console.log('reading file notes');
-        console.log('api/notes GET request received: ', results);
-        res.json(results);
+
+        console.log('api/notes GET request received: ', data);
+        res.json(data);
     })
 
 
