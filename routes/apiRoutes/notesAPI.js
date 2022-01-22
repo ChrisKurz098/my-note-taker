@@ -10,7 +10,6 @@ router.get('/notes', (req, res) => {
             return console.error(err);
         }
 
-        console.log('api/notes GET request received: ', data);
         res.json(data);
     })
 
@@ -18,12 +17,14 @@ router.get('/notes', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-    //receive new note in body and add to db.json
-    //give each note a unique id
-    //return new note to client
-    let newNote = req.body;
-    console.log('api/notes POST request received');
-    res.send('api/notes POST request received');
+    let notesJson = JSON.parse(fs.readFileSync(path.join(__dirname, '../../db/db.json'), 'utf8'));
+
+   notesJson.push(req.body);
+   const updatednotes = JSON.stringify(notesJson);
+
+   fs.writeFileSync(path.join(__dirname, '../../db/db.json'), updatednotes)
+
+    res.json(req.body);
 });
 
 module.exports = router;
