@@ -31,7 +31,7 @@ const getNotes = () =>
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-    },
+    }
   });
 
 const saveNote = (note) =>
@@ -123,8 +123,6 @@ const renderNoteList = async (notes) => {
 
   let jsonNotes = await notes.json();
 
-  //---------------------------------------------------->doesnt seem like i should have to JSON.parse the data
- jsonNotes = JSON.parse(jsonNotes);
 
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
